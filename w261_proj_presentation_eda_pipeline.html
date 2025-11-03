@@ -191,6 +191,17 @@
             border-left-color: #3fb950;
         }
 
+        .class-rebalancing .block-header {
+            background: linear-gradient(135deg, #674ea7 0%, #351c75 100%);
+        }
+        .class-rebalancing .block-icon {
+            background: rgba(46, 160, 67, 0.0);
+        }
+        .class-rebalancing .block-details li {
+            border-left-color: #8e7cc3;
+        }
+
+
         .data-split .block-header {
             background: linear-gradient(135deg, #bf8700 0%, #9a6700 100%);
         }
@@ -300,13 +311,14 @@
                             <ul>
                                 <li>Merge flight and weather data by airport and timestamp</li>
                                 <li>Add holiday data</li>
+								<li>(Stretch)Re-join flight data as previous leg data (of the same airplane)</li
                             </ul>
                         </li>
-                        <li>Drop columns exceeding the missing-value threshold</li>
+                        <li>Drop columns exceeding the missing-value threshold or deemed unnecessary</li>
                         <li>Cast columns to appropriate data types</li>
                         <li><strong>Handle missing values:</strong>
                             <ul>
-                                <li>Impute numeric variables with the mean</li>
+                                <li>Impute numeric variables with zero/mean/median, decided after EDA</li>
                                 <li>Address missing departure and arrival times</li>
                                 <li>Address missing data from weather stations</li>
                             </ul>
@@ -356,8 +368,26 @@
                                 <li>Optional: ChiSqSelectorModel / Lasso</li>
                             </ul>
                         </li>
-                        <li>Handle class imbalance based on EDA insights</li>
+                        <li>Data normalization</li>
                         <li>PCA visualization to assess class separability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="arrow">↓</div>
+		
+        <div class="pipeline-block class-rebalancing">
+            <div class="block-header" onclick="toggleBlock(this)">
+                <div class="block-title">
+                    <div class="block-icon">⚖️</div>
+                    <span>Class Rebalancing</span>
+                </div>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="block-content">
+                <div class="block-details">
+                    <ul>
+                        <li>Handle class imbalance (e.g. use SMOTE) based on EDA insights</li>
                     </ul>
                 </div>
             </div>
@@ -383,8 +413,8 @@
                             <li><strong>Time-based rolling cross-validation example:</strong>
                                 <ul>
                                     <li>Fold 1: Train Jan–Mar → Validation Apr</li>
-                                    <li>Fold 2: Train Jan–Apr → Validation May</li>
-                                    <li>Fold 3: Train Jan–May → Validation Jun</li>
+                                    <li>Fold 2: Train Feb–Apr → Validation May</li>
+                                    <li>Fold 3: Train Mar–May → Validation Jun</li>
                                 </ul>
                             </li>
                         </ul>
@@ -406,27 +436,6 @@
                             <li>Prepare test data using a time-based split aligned with the split ratio</li>
                         </ul>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="arrow">↓</div>
-
-        <!-- Data Processing -->
-        <div class="pipeline-block checkpoint">
-            <div class="block-header" onclick="toggleBlock(this)">
-                <div class="block-title">
-                    <div class="block-icon">💾</div>
-                    <span>Saving Datasets</span>
-                </div>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <div class="block-content">
-                <div class="block-details">
-                    <ul>
-                        <li>Save training, validation, and test sets in efficient formats (e.g., Parquet)</li>
-                        <li>Checkpoint processed datasets to cloud storage for reproducibility and future use</li>
-                    </ul>
                 </div>
             </div>
         </div>
